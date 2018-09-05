@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./promise.js"></script>
+    <script type="text/javascript">
+
+        // 通过promise解决该问题
+        new Promise(function(resolve,reject) {
+              console.log('我执行了');
+              setTimeout(function() {
+                console.log(1);
+                resolve();
+              }, 3000);
+        })
+        .then(function(data) {
+            return new Promise(function(resolve,reject) {
+                 // 1秒输出
+                setTimeout(function() {
+                    console.log(2);
+                    resolve()
+                }, 1000);
+            });
+        }, function(err){} )
+        .then(function(data) {
+            return new Promise(function(resolve,reject) {
+                 // 1秒输出
+                setTimeout(function() {
+                    console.log(3);
+                    resolve()
+                },2000);
+            });
+        }, function(err){})
+        .then(function(){
+            console.log('结束')
+        }, function(err){})
+
+    </script>
+</body>
+</html>
